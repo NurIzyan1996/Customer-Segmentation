@@ -1,5 +1,6 @@
 # Customer Segmentation
-Creating classification where customers are classified into 4 segments (A, B, C, D) based on their customer’s gender, age, profession, spending pattern, and etc.
+Creating classification where customers are classified into 4 segments (A, B, C, D) based on customer’s gender, age, profession, spending pattern, and etc
+for a company to design a marketing strategy to target the most profitable segments.
 
 # Description
 This repository contains 3 python files (train.py, deploy.py, modules.py).
