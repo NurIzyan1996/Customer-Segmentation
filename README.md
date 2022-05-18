@@ -18,7 +18,7 @@ module.py contains the codes where there are class and functions to be used in t
 4. Paste the local network link into your browser and it will automatically redirected to tensorboard local host and done! Tensorboard is now can be analyzed.
 
 # The Architecture of Model
-![The Architecture of Model]([Deep_Learning_model.PNG](https://github.com/NurIzyan1996/Customer-Segmentation/blob/main/image/Deep_Learning_model.PNG))
+![The Architecture of Model](Deep_Learning_model.PNG)
 
 # The Performance of model
 ![The Performance of model](model_performance.PNG)
