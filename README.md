@@ -1,5 +1,5 @@
 # Customer Segmentation
-Creating classification where customers are classified into 4 segments (A, B, C, D) based on customer’s gender, age, profession, spending pattern, and etc
+Creating a deep learning model where customers are classified into 4 segments (A, B, C, D) based on customer’s gender, age, profession, spending pattern, and etc
 for a company to design a marketing strategy to target the most profitable segments.
 
 # Description
