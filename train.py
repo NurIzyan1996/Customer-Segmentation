@@ -64,56 +64,56 @@ X = pd.DataFrame(imputer.fit_transform(X))
 
 # a) scale the features using Min Max Scaler approach
 X = eda.min_max_scaler(X)
-
+ 
 # b) encode the target data using One Hot encoder approach
 y = df['Segmentation']
 enc = OneHotEncoder(sparse=False) 
 y = enc.fit_transform(np.expand_dims(y,axis=-1))
 pickle.dump(enc, open(OHE_SAVE_PATH, 'wb'))
-# #%%
-# # STEP 5: DL Model
-# # a) split train & test data
-# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, 
-#                                                     random_state=42)
-# X_train = np.expand_dims(X_train,-1)
-# X_test = np.expand_dims(X_test,-1)
+#%%
+# STEP 5: DL Model
+# a) split train & test data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, 
+                                                    random_state=42)
+X_train = np.expand_dims(X_train,-1)
+X_test = np.expand_dims(X_test,-1)
 
-# # b) create model
-# mc = ModelCreation()
-# model = mc.sequential(input_shape=9, output_shape=4, nb_nodes=256)
+# b) create model
+mc = ModelCreation()
+model = mc.sequential(input_shape=9, output_shape=4, nb_nodes=256)
 
-# plot_model(model)
+plot_model(model)
 
-# model.compile(optimizer = 'adam', 
-#               loss = 'categorical_crossentropy', 
-#               metrics = ['acc'])
+model.compile(optimizer = 'adam', 
+              loss = 'categorical_crossentropy', 
+              metrics = ['acc'])
 
-# # c) Callbacks 
-# log_files = os.path.join(LOG_PATH, 
-#                          datetime.datetime.now().strftime('%Y%m%d-%H%M%S'))
-# tensorboard_callback = TensorBoard(log_dir=log_files, histogram_freq=1)
-# early_stopping_callback = EarlyStopping(monitor='val_loss', patience=50)
+# c) Callbacks 
+log_files = os.path.join(LOG_PATH, 
+                          datetime.datetime.now().strftime('%Y%m%d-%H%M%S'))
+tensorboard_callback = TensorBoard(log_dir=log_files, histogram_freq=1)
+early_stopping_callback = EarlyStopping(monitor='val_loss', patience=50)
 
-# # e) train the model
-# hist = model.fit(X_train, y_train, epochs=100, 
-#                     validation_data=(X_test,y_test), 
-#                     callbacks=[tensorboard_callback,early_stopping_callback])
+# e) train the model
+hist = model.fit(X_train, y_train, epochs=100, 
+                    validation_data=(X_test,y_test), 
+                    callbacks=[tensorboard_callback,early_stopping_callback])
 
 
-# #STEP 7: Model Evaluation
+#STEP 7: Model Evaluation
 
-# predicted_y = np.empty([len(X_test), 4])
+predicted_y = np.empty([len(X_test), 4])
 
-# for index, test in enumerate(X_test):
-#     predicted_y[index,:] = model.predict(np.expand_dims(test, axis=0))
+for index, test in enumerate(X_test):
+    predicted_y[index,:] = model.predict(np.expand_dims(test, axis=0))
 
-# # STEP 9: Model analysis
-# y_pred = np.argmax(predicted_y, axis=1)
-# y_true = np.argmax(y_test, axis=1)
+# STEP 9: Model analysis
+y_pred = np.argmax(predicted_y, axis=1)
+y_true = np.argmax(y_test, axis=1)
 
-# ModelEvaluation().report_metrics(y_true, y_pred)
+ModelEvaluation().report_metrics(y_true, y_pred)
 
-# model.save(MODEL_SAVE_PATH)
+model.save(MODEL_SAVE_PATH)
 
 
 
